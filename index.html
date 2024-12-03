@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SMG Guild</title>
+    <link rel="stylesheet" href="style.css">
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+          const discordWidgetUrl = "https://discord.com/api/guilds/YOUR_SERVER_ID/widget.json";
+    
+          try {
+            const response = await fetch(discordWidgetUrl);
+            if (!response.ok) throw new Error("Failed to fetch Discord data.");
+    
+            const data = await response.json();
+    
+            // Update the page with server details
+            document.getElementById("server-name").textContent = data.name;
+            document.getElementById("online-count").textContent = `${data.presence_count} members online`;
+    
+            const voiceChannels = data.channels.filter(channel => channel.type === 2); // Voice channels
+            const voiceChannelList = document.getElementById("voice-channels");
+    
+            voiceChannels.forEach(channel => {
+              const li = document.createElement("li");
+              li.textContent = channel.name;
+              voiceChannelList.appendChild(li);
+            });
+          } catch (error) {
+            console.error("Error loading Discord widget:", error);
+          }
+        });
+      </script>
+</head>
+<body>
+    <div class="container">
+        <h1>A simple Guild with everything</h1>
+        <h3>"Starry Mooncake Gaming"</h3>
+        <h3>"Follow our Twitter/X"</h3>
+        <h3>"Follow Our Twitch"</h3>
+        <p>Connect with our amazing community and enjoy the fun!</p>
+        <a href="https://dashboard.pixels.xyz/guild/smg" class="pixel-btn" target="_blank">Join Our Membership</a><br>
+        <a href="https://www.cryptocurrencyhongkong.com/" class="hk-btn" target="_blank">Crypto Hongkong</a><br>
+        <a href="https://trezor.io/resellers" class="trezor-btn" target="_blank">Official Trezor Reseller</a>
+    </div>
+    <div class="button-container">
+      <a href="https://discord.gg/starrymooncake" class="icon-btn" target="_blank">
+        <img src="img/icon1.png" alt="Icon 1"></a>
+      <a href="https://x.com/StarryMooncakeG" class="icon-btn" target="_blank">
+        <img src="img/icon2.png" alt="Icon 2"></a>
+      <a href="https://www.twitch.tv/starrymooncake" class="icon-btn" target="_blank">
+        <img src="img/icon3.png" alt="Icon 3"></a>
+    </div>
+    <div class="iframe-container">
+      <iframe 
+        src="https://discord.com/widget?id=1220358640159162397&theme=dark" 
+        allowtransparency="true" 
+        frameborder="0" 
+        sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+        title="Discord">
+    </iframe>
+    </div>
+</body>
+</html>
